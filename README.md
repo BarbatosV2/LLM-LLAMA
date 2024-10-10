@@ -20,7 +20,7 @@ Make a file and put those downloaded files into there.
 
 # My PC Specs
 
-> CPU  - Ryzen 9 5900HS
+> CPU  - Ryzen 9 5900HS (8 Cores 16 Threads)
 
 > RAM  - 24GB (3200MHz)
 
