@@ -10,7 +10,7 @@ https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct/tree/main
 ```
 # How to RUN
 
-Download the all files from [HuggingFace](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct/tree/main)
+Download the all files from [HuggingFace](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct/tree/main) (There are other lightweight files)
 
 Make a file and put those downloaded files into there.
 
