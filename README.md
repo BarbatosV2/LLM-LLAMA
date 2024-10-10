@@ -14,6 +14,8 @@ Download the all files from [HuggingFace](https://huggingface.co/meta-llama/Meta
 
 Make a file and put those downloaded files into there.
 
+Run Python file from Terminal to start. 
+
 # Hardware Usage 
 
 ![Screenshot 2024-10-10 034412](https://github.com/user-attachments/assets/a29809f4-ad12-4dee-a5c1-e93394d259c3)
