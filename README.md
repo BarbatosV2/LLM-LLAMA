@@ -14,6 +14,8 @@ Download the all files from [HuggingFace](https://huggingface.co/meta-llama/Meta
 
 Make a file and put those downloaded files into there.
 
+llama_convo.py is for normal conversation and llama_convo_doc.py is to ask pdf related question.
+
 Run Python file from Terminal to start. 
 
 gpu_test.py is to make sure graphic card (cuda) is using. 
