@@ -16,6 +16,28 @@ Make a file and put those downloaded files into there.
 
 llama_convo.py is for normal conversation and llama_convo_doc.py is to ask pdf related question.
 
+Change or adjust num_beam for better resluts. 
+
+# Pros of Higher Beam Size
+
+1. Improved Quality:
+A larger beam size can find sequences with higher overall probabilities, leading to more coherent responses.
+2. Diversity:
+More beams mean the model can explore a broader range of possible outputs.
+3. Avoiding Traps:
+With fewer beams, the model might prematurely settle on a suboptimal sequence.
+
+# Cons of Higher Beam Size
+
+1. Increased Computation:
+Higher beam sizes require more computation, which increases latency and resource usage.
+2. Reduced Diversity:
+If the beams converge to similar high-probability sequences, increasing the beam size won’t add value.
+3. Over-optimization:
+In some cases, higher beam sizes may cause the model to favor overly generic or "safe" responses.
+4. Diminishing Returns:
+Beyond a certain point (e.g., num_beams=5 or num_beams=10), quality improvements tend to plateau or even degrade.
+
 Run Python file from Terminal to start. 
 
 gpu_test.py is to make sure graphic card (cuda) is using. 
