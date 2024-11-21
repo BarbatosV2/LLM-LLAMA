@@ -18,6 +18,18 @@ llama_convo.py is for normal conversation and llama_convo_doc.py is to ask pdf r
 
 Change or adjust num_beam for better resluts. 
 
+# llama_convo
+
+It runs normally like other online LLM with no limitation.
+
+# llama_convo_doc
+
+It is made to read pdf or documents and make summarise about them.
+
+# food_llama
+
+Making LLM to talk about only the specific type of related topic (food) and reject when user wants to talk about others things.
+
 # Pros of Higher Beam Size
 
 1. Improved Quality:
