@@ -1,5 +1,13 @@
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+import warnings
+import logging
+
+# Suppress warnings
+warnings.filterwarnings("ignore", category=UserWarning, module="transformers")
+warnings.filterwarnings("ignore", category=UserWarning, module="torch")
+logging.getLogger("transformers").setLevel(logging.ERROR)
+logging.getLogger("torch").setLevel(logging.ERROR)
 
 # Paths to model and tokenizer
 model_path = 'meta-llama'
@@ -22,7 +30,7 @@ model.to(device)
 conversation_history = ""
 
 def ask_question(question):
-    """Generates an answer to a single question, maintaining conversation history."""
+    """Generates an answer, maintaining conversation history."""
     global conversation_history
 
     # Add the current question to the conversation history
@@ -35,28 +43,34 @@ def ask_question(question):
         return_tensors='pt', 
         padding=True, 
         truncation=True, 
-        max_length=512
+        max_length=2048
     )
+    inputs['attention_mask'] = inputs['input_ids'] != tokenizer.pad_token_id  # Explicit attention mask
     inputs = {key: value.to(device) for key, value in inputs.items()}
 
     # Generate output
-    output_sequences = model.generate(
+    generated_ids = model.generate(
         inputs['input_ids'],
-        max_new_tokens=300,     #token depends on the generate text
+        attention_mask=inputs['attention_mask'],  # Explicit mask to avoid warnings
+        max_new_tokens=800,
         num_return_sequences=1,
-        num_beams=3,  # Beam search for better quality
+        num_beams=3,
         no_repeat_ngram_size=2,
-        pad_token_id=tokenizer.eos_token_id
+        pad_token_id=tokenizer.eos_token_id,
+        do_sample=True,  # Enable sampling for diverse output
     )
 
     # Decode the response
-    answer = tokenizer.decode(output_sequences[0], skip_special_tokens=True)
+    decoded_tokens = tokenizer.decode(generated_ids[0], skip_special_tokens=True)
+    new_response = decoded_tokens.split("AI:")[-1].strip()  # Get the latest response
 
-    # Append only the new response to the conversation history
-    new_response = answer.split("AI:")[-1].strip()
-    conversation_history += f" {new_response}"
+    # Print the response all at once
+    print(f"AI: {new_response}")
     
-    # Return only the response
+    # Update conversation history
+    conversation_history += f" {new_response}"
+
+    # Return the full response
     return new_response
 
 # Example conversational usage
@@ -66,5 +80,4 @@ while True:
         print("Ending conversation.")
         break
     
-    answer = ask_question(question)
-    print(answer)
+    ask_question(question)
